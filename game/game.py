@@ -1,6 +1,9 @@
 import numpy as np
 
 class game:
+    ###
+    ### Konstruktor für Game-Klasse
+    ###
     def __init__(
             self,
             board_width=6,
@@ -12,7 +15,9 @@ class game:
         print(self.board)
         print(" ")
         
-        
+    ###
+    ### Zug Funktion
+    ###
     def playeraction(
             self,
             player_id,
@@ -28,11 +33,15 @@ class game:
 
         return False
         
-
+    ###
+    ### Zeigt das Spielfeld an
+    ###
     def display(self):
         print(self.board)
         print(" ")
-        
+    ###
+    ### Prüft ob ein Zug zu einem Sieg geführt hat
+    ###
     def check_win(
             self,
             player_id,
