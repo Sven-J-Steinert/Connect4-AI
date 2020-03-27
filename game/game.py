@@ -1,6 +1,7 @@
 import numpy as np
 
 class game:
+    
     ###
     ### Konstruktor für Game-Klasse
     ###
@@ -17,6 +18,8 @@ class game:
         
     ###
     ### Zug Funktion
+    ### Erster Boolean: gültiger Zug
+    ### Zweiter Parameter: gewonnen mit dem Zug
     ###
     def playeraction(
             self,
@@ -31,7 +34,7 @@ class game:
                 self.board[i,column] = player_id
                 return (True, self.check_win(player_id, x=column, y=i))
 
-        return False
+        return (False)
         
     ###
     ### Zeigt das Spielfeld an
@@ -39,6 +42,8 @@ class game:
     def display(self):
         print(self.board)
         print(" ")
+        
+        
     ###
     ### Prüft ob ein Zug zu einem Sieg geführt hat
     ###
@@ -148,3 +153,17 @@ class game:
 
         if sum_dn >= 4:
             return True
+     
+    ###
+    ### Gibt alle gültigen Züge zurück
+    ###
+    def get_valid_moves(self):
+        
+        valid_moves = []
+        
+        for i in range(self.board_width):
+            if self.board[0,i] == 0:
+                valid_moves.append(i)        
+        
+        return valid_moves
+        
