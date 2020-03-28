@@ -35,3 +35,5 @@ for x in range(0, 3*7):
         break
     time.sleep(waittime) 
 # end for
+    
+gameInstance.display(nice=True)

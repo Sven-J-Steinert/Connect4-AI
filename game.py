@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 class game:
     ''' Basis Spielklasse '''
@@ -58,10 +59,33 @@ class game:
     
     ######################################################################################################################
     # The function display prints the board to the terminal
-    def display(self):
-        print(self.board)
-        print(" ")
+    def display(self,nice=None):
+        if nice:
+            fig,ax = plt.subplots(1,1)
+            p1CordsX = []
+            p1CordsY = []
+            p2CordsX = []
+            p2CordsY = []
+            
+            for x in range(self.board_width):
+                for y in range(self.board_height):
+                    if self.board[y][x] == 1:
+                        p1CordsX.append(x+1)
+                        p1CordsY.append(self.board_height-y)
+                    elif self.board[y][x] == -1:
+                        p2CordsX.append(x+1)
+                        p2CordsY.append(self.board_height-y)
+            
+            ax.scatter(p1CordsX,p1CordsY,s=300,c='y')
+            ax.scatter(p2CordsX,p2CordsY,s=300,c='r')
+            ax.set_xlim([.5,self.board_width+0.5])
+            ax.set_ylim([.5,self.board_height+0.5])
+            
+        else:
+            print(self.board)
+            print(" ")
     # end dispaly
+        
 
         
     ###
