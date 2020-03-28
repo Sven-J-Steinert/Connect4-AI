@@ -1,7 +1,6 @@
 import numpy as np
 
 class game:
-<<<<<<< HEAD:game/game.py
     ''' Basis Spielklasse '''
     ###
     ### Konstruktor für Game-Klasse
@@ -29,44 +28,19 @@ class game:
     ### Zug Funktion
     ### Erster Boolean: gültiger Zug
     ### Zweiter Parameter: gewonnen mit dem Zug
-    ###
-    def playeraction(
-            self,
-            player_id,
-            column
-            ):
-        if (column >self.board_width):
-            return False
-=======
-    def __init__(self, board_width=7, board_height=6 ):
-        
-        self.board_width = board_width
-        self.board_height = board_height
-        self.board = np.zeros((board_height,board_width))
-        print(self.board)
-        print(" ")
-    #end __init__
-    
-    
+    ### 
     def playAction(self, player_id, column):
         if (column > self.board_width):
             return (False, False)
->>>>>>> Marvin:game.py
+
         
         for i in reversed( range(self.board_height)):
             if self.board[i,column] == 0:
                 self.board[i,column] = player_id
                 return (True, self.check_win(player_id, x=column, y=i))
 
-<<<<<<< HEAD:game/game.py
+
         return (False)
-        
-    ###
-    ### Zeigt das Spielfeld an
-    ###
-=======
-        return (False, False)
-    #end playeraction
     
     
 
@@ -84,13 +58,11 @@ class game:
     
     ######################################################################################################################
     # The function display prints the board to the terminal
->>>>>>> Marvin:game.py
     def display(self):
         print(self.board)
         print(" ")
     # end dispaly
-        
-<<<<<<< HEAD:game/game.py
+
         
     ###
     ### Prüft ob ein Zug zu einem Sieg geführt hat
@@ -101,9 +73,6 @@ class game:
             x,
             y
             ):
-=======
-    def check_win(self, player_id, x, y):
->>>>>>> Marvin:game.py
         sum_x = 1
         sum_y = 1
         sum_dp = 1
@@ -204,7 +173,6 @@ class game:
 
         if sum_dn >= 4:
             return True
-<<<<<<< HEAD:game/game.py
      
     ###
     ### Gibt alle gültigen Züge zurück
@@ -225,6 +193,3 @@ class game:
     def get_game_new_object(self):
         return game(old_game=self)
     
-=======
-    #end checkwin
->>>>>>> Marvin:game.py

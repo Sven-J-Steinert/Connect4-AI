@@ -1,5 +1,5 @@
 import numpy as np
-import tensorflow as tf
+#import tensorflow as tf
 
 class AZPlayer:
     
@@ -41,6 +41,9 @@ class AZPlayer:
         randi = np.random.randint(low=0, high=len(possibleCols))
         return possibleCols[randi]
     #end chooseCol
+    
+    def get_search_prob():
+        return 0
     
     
 
