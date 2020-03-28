@@ -1,44 +1,55 @@
 import numpy as np
 
 class game:
-    def __init__(
-            self,
-            board_width=6,
-            board_height=7
-            ):
+    def __init__(self, board_width=7, board_height=6 ):
+        
         self.board_width = board_width
         self.board_height = board_height
         self.board = np.zeros((board_height,board_width))
         print(self.board)
         print(" ")
-        
-        
-    def playeraction(
-            self,
-            player_id,
-            column
-            ):
-        if (column >self.board_width):
-            return False
+    #end __init__
+    
+    
+    def playAction(self, player_id, column ):
+        if (column > self.board_width):
+            return (False, False)
         
         for i in reversed( range(self.board_height)):
             if self.board[i,column] == 0:
                 self.board[i,column] = player_id
                 return (True, self.check_win(player_id, x=column, y=i))
 
-        return False
-        
+        return (False, False)
+    #end playeraction
+    
+    ######################################################################################################################
+    # The function getPossibleActions returns a np-vector of all collums that are not filled
+    def getPossibleActions(self):
+       # return board[0,:].where()
+       print(np.where(self.board[1,:] == 0))        
+    #end getPossibleActions
 
+    ######################################################################################################################
+    # The function setBoard is the set function for the gameboard. It may be used in case of reviewing the new state during learning
+    def setBoard(self, newBoard):
+        self.board = newBoard
+    #end setBoard
+    
+    ######################################################################################################################
+    # The function getBoard is the set function for the gameboard. It may be used in case of reviewing the new state during learning
+    def getBoard(self):
+        return self.board
+    #end getBoard
+    
+    ######################################################################################################################
+    # The function display prints the board to the terminal
     def display(self):
         print(self.board)
         print(" ")
+    # end dispaly
         
-    def check_win(
-            self,
-            player_id,
-            x,
-            y
-            ):
+    def check_win(self, player_id, x, y):
         sum_x = 1
         sum_y = 1
         sum_dp = 1
@@ -139,3 +150,4 @@ class game:
 
         if sum_dn >= 4:
             return True
+    #end checkwin
