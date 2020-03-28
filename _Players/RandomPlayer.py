@@ -15,7 +15,8 @@ class RandomPlayer:
     # The function chooseCol returns a integer with the index of the choosen column depending on the board pboard
     def chooseCol(self, pGame):
         possibleCols = self.getPossibleActions(pGame.getBoard())
-        randi = np.random.randint(low=0, high=possibleCols.size)
+        print(possibleCols)
+        randi = np.random.randint(low=0, high=len(possibleCols))
         return possibleCols[randi]
     #end chooseCol
     
@@ -24,10 +25,13 @@ class RandomPlayer:
     ######################################################################################################################
     # The function getPossibleActions returns a np-vector of all collums that are not filled
     def getPossibleActions(self, pboard):
-        print(np.nonzero(pboard[0]))
-        x1 = np.where(pboard[0] == 0) #selects the column indices of where the first row is empty  
-        print(x1)
-        return x1    
+        valid_moves = []
+        
+        for i in range(len(pboard[0,:])):
+            if pboard[0,i] == 0:
+                valid_moves.append(i)        
+        
+        return valid_moves
     #end getPossibleActions
     
     
