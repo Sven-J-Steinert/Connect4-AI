@@ -15,7 +15,7 @@ class RandomPlayer:
     # The function chooseCol returns a integer with the index of the choosen column depending on the board pboard
     def chooseCol(self, pGame):
         possibleCols = self.getPossibleActions(pGame.getBoard())
-        print(possibleCols)
+        #print(possibleCols)
         randi = np.random.randint(low=0, high=len(possibleCols))
         return possibleCols[randi]
     #end chooseCol
