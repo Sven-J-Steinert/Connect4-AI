@@ -1,20 +1,28 @@
 import numpy as np
 
 class game:
-    
+    ''' Basis Spielklasse '''
     ###
     ### Konstruktor für Game-Klasse
     ###
     def __init__(
             self,
             board_width=6,
-            board_height=7
+            board_height=7,
+            old_game=None
             ):
-        self.board_width = board_width
-        self.board_height = board_height
-        self.board = np.zeros((board_height,board_width))
-        print(self.board)
-        print(" ")
+        ''' Konstruktor für die game Klasse. bekommt entweder die Breite und Höhe für ein neues Spiel übergeben oder ein bestehendens Spiel, dass dann kopiert wird '''
+        if old_game:
+            print("Spiel übergeben")
+            self.board = np.array(old_game.board)
+            self.board_height = old_game.board_height
+            self.board_width = old_game.board_width
+        else:
+            self.board_width = board_width
+            self.board_height = board_height
+            self.board = np.zeros((board_height,board_width))
+            # print(self.board)
+            # print(" ")
         
     ###
     ### Zug Funktion
@@ -167,3 +175,9 @@ class game:
         
         return valid_moves
         
+    ###
+    ### Gibt das Spielfeld als numpy Matrix zurück
+    ###
+    def get_game_new_object(self):
+        return game(old_game=self)
+    
