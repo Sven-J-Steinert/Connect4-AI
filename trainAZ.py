@@ -30,6 +30,11 @@ class GameStore:
         
 def main():
     
+    self_play()
+    
+    return 0
+
+def self_play():
     store = GameStore()
     
     # Play 25.000 games against it self and store moves
@@ -63,8 +68,75 @@ def main():
         pickle.dump(store, file)
     return 0
 
+def retrain_network():
+    
+    return 0
 
+def evaluate_network():
+    
+    return 0
 
+class MCTS:
+    
+    #neue Namen?
+    def __init__(self,root,cpuct):
+        self.root = root
+        self.tree={}
+        self.cpuct = cpuct
+        
+        
+    def __len__(self):
+        return len(self.tree)
+    
+    def move_to_leaf(self):
+        
+        current_node = self.root
+        
+        done = 0
+        value = 0
+        
+    def backFill(self,leaf,value,breadcrumbs):
+        pass
+    
+    def addNode(self,leaf,value,breadcrumbs):
+        pass
+    
+    
+    
+######
+## Node Klasse
+###### 
+class Node:
+    
+    def __init__(self,state):
+        self.state = state
+        self.player_turn = state.player_turn
+        self.id = state.id
+        self.edges = []
+        
+        
+    def is_leaf(self):
+        return len(self.edges)==0
+    
+######
+## Edge Klasse
+###### 
+class Edge:
+    
+    def __init__(self,inNode,outNode,prior,action):
+        
+        self.id = inNode.state.id + '|' + outNode.state.id
+        self.inNode = inNode
+        self.outNode = outNode
+        self.player_turn = inNode.state.player_turn
+        self.action = action
+        
+        self.stats = {
+            'N':0,
+            'W':0,
+            'Q':0,
+            'P':prior,
+            }
 
 
 if __name__=="__main__":

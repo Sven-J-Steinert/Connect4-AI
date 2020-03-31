@@ -31,6 +31,7 @@ class game:
     ### Zweiter Parameter: gewonnen mit dem Zug
     ### 
     def playAction(self, player_id, column):
+        self.last_player = player_id
         if (column > self.board_width):
             return (False, False)
 
@@ -76,8 +77,8 @@ class game:
                         p2CordsX.append(x+1)
                         p2CordsY.append(self.board_height-y)
             
-            ax.scatter(p1CordsX,p1CordsY,s=300,c='y')
-            ax.scatter(p2CordsX,p2CordsY,s=300,c='r')
+            ax.scatter(p1CordsX,p1CordsY,s=600,c='y')
+            ax.scatter(p2CordsX,p2CordsY,s=600,c='r')
             ax.set_xlim([.5,self.board_width+0.5])
             ax.set_ylim([.5,self.board_height+0.5])
             
@@ -217,3 +218,8 @@ class game:
     def get_game_new_object(self):
         return game(old_game=self)
     
+    ###
+    ### Gibt den nächsten Spieler zurück
+    ###
+    def get_next_player(self):
+        return self.last_player*(-1)

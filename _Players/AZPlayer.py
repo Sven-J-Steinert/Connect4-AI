@@ -3,7 +3,9 @@ import numpy as np
 
 class AZPlayer:
     
-    training = True
+    
+    def __init__(self,Training=True):
+        self.Training=Training
     
     ######################################################################################################################
     # The function getPossibleActions returns a np-vector of all collums that are not filled
@@ -45,5 +47,9 @@ class AZPlayer:
     def get_search_prob():
         return 0
     
-    
+
+class NetworkConfig:
+    pass
+
+
 
