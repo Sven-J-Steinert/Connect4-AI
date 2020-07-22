@@ -6,6 +6,9 @@ from _Players.RandomPlayer import RandomPlayer
 import numpy as np
 import time
 
+
+
+
 # Instanciation of the Game
 gameInstance = game(7,6)
 
@@ -18,22 +21,24 @@ waittime = 0.0 #time between each move of the players
 
 # the loop for playing the game until somebody won or the limit is reached
 for x in range(0, 3*7):
-    
+
     c = Pp1.chooseCol(gameInstance) #the positive Player chooses his column
     move_return = gameInstance.playAction(Pp1.getId(), c) # the positive Player plays
     gameInstance.display()
     if(move_return[1]):
         print('The positive Player won the game')
+        winner=1
         break
     time.sleep(waittime)
-    
+
     c = Pn1.chooseCol(gameInstance) #the negative Player chooses his column
     move_return = gameInstance.playAction(Pn1.getId(), c) # the negative Player plays
     gameInstance.display()
     if(move_return[1]):
         print('The negative Player won the game')
+        winner=-1
         break
-    time.sleep(waittime) 
+    time.sleep(waittime)
 # end for
-    
-gameInstance.display(nice=True)
+
+gameInstance.display(nice=True,winner=winner)
