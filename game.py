@@ -4,17 +4,14 @@ from tkinter import PhotoImage
 
 
 class game:
-    ''' Basis Spielklasse '''
-    ###
-    ### Konstruktor für Game-Klasse
-    ###
+
     def __init__(
             self,
             board_width=6,
             board_height=7,
             old_game=None
             ):
-        ''' Konstruktor für die game Klasse. bekommt entweder die Breite und Höhe für ein neues Spiel übergeben oder ein bestehendens Spiel, dass dann kopiert wird '''
+
         if old_game:
             print("Spiel übergeben")
             self.board = np.array(old_game.board)
@@ -27,7 +24,6 @@ class game:
             # print(self.board)
             # print(" ")
 
-    ###
     ### Zug Funktion
     ### Erster Boolean: gültiger Zug
     ### Zweiter Parameter: gewonnen mit dem Zug
@@ -61,10 +57,10 @@ class game:
 
     ######################################################################################################################
     # The function display prints the board to the terminal
-    def display(self,nice=None,winner=None):
-        if nice:
+    def display(self,gui=None,winner=None):
+        if gui:
             window = Tk()
-            window.title("Connect Four AI")
+            window.title("Connect4 AI")
             canvas = Canvas(window, width = 400, height = 300)
             canvas.pack()
 
@@ -118,6 +114,7 @@ class game:
         sum_y = 1
         sum_dp = 1
         sum_dn = 1
+        self.sum_max = 1
 
         # row checking
         for ix in range(1,4):
@@ -215,6 +212,8 @@ class game:
         if sum_dn >= 4:
             return True
 
+        self.sum_max = max(sum_x , sum_y , sum_dp , sum_dn )
+
     ###
     ### Gibt alle gültigen Züge zurück
     ###
@@ -233,3 +232,6 @@ class game:
     ###
     def get_game_new_object(self):
         return game(old_game=self)
+
+    def get_max_connected(self):
+        return self.sum_max
