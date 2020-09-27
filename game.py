@@ -20,7 +20,7 @@ class game:
         else:
             self.board_width = board_width
             self.board_height = board_height
-            self.board = np.zeros((board_height,board_width))
+            self.board = np.zeros((board_height,board_width), dtype=int)
             # print(self.board)
             # print(" ")
 
@@ -32,14 +32,12 @@ class game:
         if (column > self.board_width):
             return (False, False)
 
-
         for i in reversed( range(self.board_height)):
             if self.board[i,column] == 0:
                 self.board[i,column] = player_id
                 return (True, self.check_win(player_id, x=column, y=i))
 
-
-        return (False)
+        return (False, False)
 
 
 
@@ -53,7 +51,7 @@ class game:
     # The function getBoard is the set function for the gameboard. It may be used in case of reviewing the new state during learning
     def getBoard(self):
         return self.board
-    #end getBoard
+
 
     ######################################################################################################################
     # The function display prints the board to the terminal
