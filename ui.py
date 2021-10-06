@@ -1,16 +1,17 @@
 from game import game
 from trainer import result, Neural_Network
 from _Players.RandomPlayer import RandomPlayer
+from _Players.StrategicPlayer import StrategicPlayer
 import time
 import torch
 import os
 import numpy as np
 
 population_size = 100
-batch_size = 50
-generations = 2
+batch_size = 100
+generations = 5
 surviving_rate = 0.5
-mutation_rate = 0.01
+mutation_rate = 0.1
 
 against_own_AI = False
 
@@ -44,8 +45,6 @@ for z in range(0, generations):
         NN = torch.load('data/' + str(a) + '_gen_x.pt')
         NN.eval()
 
-        # Enemey player who chooses coloumn randomly
-        Pn1 = RandomPlayer(-1)
 
         winner = 0
 
@@ -55,8 +54,22 @@ for z in range(0, generations):
             # Instanciation of the Game
             gameInstance = game(7, 6)
 
+            # Enemey player who chooses coloumn randomly
+            #Pn1 = RandomPlayer(-1)
+            Pn1 = StrategicPlayer(-1)
+
             # Turn loop
             for x in range(0, 3*7):
+
+                # Random Player
+                c_r = Pn1.chooseCol(gameInstance)  # the negative Player chooses his column
+                move_return = gameInstance.playAction(-1, c_r)  # the negative Player plays
+                if not move_return[0]:
+                    winner = 1
+                    break
+                if(move_return[1]):
+                    winner = -1
+                    break
 
                 # AI Player
                 # Board data as input for Neural Network
@@ -70,12 +83,7 @@ for z in range(0, generations):
                     winner = 1
                     break
 
-                # Random Player
-                c_r = Pn1.chooseCol(gameInstance)  # the negative Player chooses his column
-                move_return = gameInstance.playAction(Pn1.getId(), c_r)  # the negative Player plays
-                if(move_return[1]):
-                    winner = -1
-                    break
+
 
             # after one game
             if winner == 0:
@@ -115,7 +123,7 @@ for z in range(0, generations):
 
         # save all_time_high seperately
         if i == int((surviving_rate * population_size) -1) and all_time_high_active:
-            torch.save(NN, 'data/all_time_high.pt')
+            torch.save(pNN, 'data/all_time_high.pt')
 
         # Mutate Genes
         NN.W1 = pNN.W1 + (mutation_rate * torch.randn(inputSize, hiddenSize))
